@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "627291152053",
+    "project_id": "finalodevi-60306",
+    "storage_bucket": "finalodevi-60306.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627291152053:android:10b9dcc29d3e56450e68fc",
+        "android_client_info": {
+          "package_name": "com.example.contacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627291152053-ft6v02rfu3blqt3o0k9n8r4iejfmjtug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTjz4bNw65HFE-WDHr7LXP81JNbATwzOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627291152053-ft6v02rfu3blqt3o0k9n8r4iejfmjtug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627291152053:android:909f05c1a6525f310e68fc",
+        "android_client_info": {
+          "package_name": "com.example.finalmessageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627291152053-ft6v02rfu3blqt3o0k9n8r4iejfmjtug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTjz4bNw65HFE-WDHr7LXP81JNbATwzOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627291152053-ft6v02rfu3blqt3o0k9n8r4iejfmjtug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

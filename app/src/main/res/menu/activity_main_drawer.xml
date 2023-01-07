@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_grupolustur"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="@string/menu_grupOlustur" />
+        <item
+            android:id="@+id/nav_grubauyeEkle"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/menu_GrubaUyeEkle" />
+        <item
+            android:id="@+id/nav_mesajOlustur"
+            android:icon="@android:drawable/ic_menu_send"
+            android:title="@string/menu_MesajOlustur" />
+        <item
+            android:id="@+id/nav_mesajgonder"
+            android:icon="@android:drawable/presence_online"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_delete"
+            android:title="Logout" />
+    </group>
+</menu>
