@@ -1,12 +1,17 @@
 package com.example.finalmessageapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,7 @@ import com.example.finalmessageapp.Adapter.GroupHomeAdapter;
 import com.example.finalmessageapp.Adapter.HomeMessageAdapter;
 import com.example.finalmessageapp.Interface.GroupAddMemberListener;
 import com.example.finalmessageapp.Interface.MessageListener;
+import com.example.finalmessageapp.Models.ContactsToGroup;
 import com.example.finalmessageapp.Models.GroupModels;
 import com.example.finalmessageapp.Models.MessageData;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,11 +78,10 @@ public class MesajGonder extends Fragment implements GroupAddMemberListener, Mes
         SendMessageAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SecilenMesaj!=null && SeciliGurupid!=null) {
-                    Toast.makeText(getContext(), "Mesaj Gönderiliyor", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getContext(), "Lütfen Mesaj ve Grup Seçiniz", Toast.LENGTH_SHORT).show();
+                if(ContextCompat.checkSelfPermission(getContext(),Manifest.permission.SEND_SMS)== PackageManager.PERMISSION_GRANTED){
+                    sendSMSMesasge();
+                }else{
+                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},100);
                 }
             }
         });
@@ -110,6 +115,50 @@ public class MesajGonder extends Fragment implements GroupAddMemberListener, Mes
 
         return rootView;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode==100 && grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+            sendSMSMesasge();
+        }
+        else{
+            Toast.makeText(getContext(), "İzin Verilmedi", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void sendSMSMesasge(){
+        if(SecilenMesaj!=null && SeciliGurupid!=null) {
+
+            SmsManager smsManager = SmsManager.getDefault();
+
+            firebaseFirestore.collection("contactsToGroup")
+                    .whereEqualTo("groupid",String.valueOf(SeciliGurupid))
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isComplete()){
+                                for(QueryDocumentSnapshot doc:task.getResult()){
+                                    ContactsToGroup contactsToGroup = doc.toObject(ContactsToGroup.class);
+                                    String number = contactsToGroup.getContactsPhone();
+                                    smsManager.sendTextMessage(number,null,SecilenMesaj,null,null);
+                                }
+                                Toast.makeText(getContext(), "Mesaj Başarıyla Gönderildi", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
+
+        }
+        else{
+            Toast.makeText(getContext(), "Lütfen Mesaj ve Grup Seçiniz", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     private void LoadMessage(){
 

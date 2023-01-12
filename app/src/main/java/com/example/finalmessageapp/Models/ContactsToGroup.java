@@ -10,6 +10,9 @@ public class ContactsToGroup {
         this.contactsPhone = contactsPhone;
     }
 
+    public ContactsToGroup() {
+    }
+
     public String getUserid() {
         return userid;
     }

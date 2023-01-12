@@ -187,7 +187,7 @@ public class GrubaUyeEkle extends Fragment implements GroupAddMemberListener, Co
 
                 String userid = firebaseUser.getUid();
 
-                ContactsToGroup contactsToGroup = new ContactsToGroup(SeciliGurupid,userid,SecilenKisiNumarasi);
+                ContactsToGroup contactsToGroup = new ContactsToGroup(userid,SeciliGurupid,SecilenKisiNumarasi);
 
                 firebaseFirestore.collection("contactsToGroup")
                         .add(contactsToGroup)
